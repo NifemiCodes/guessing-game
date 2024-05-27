@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --z-index: 0;
+}
+
+body {
+  background-color: black;
+  font-family: "Saira Semi Condensed";
+}
+
+h1 {
+  font-family: "Chakra Petch";
+  font-size: 2.3rem;
+}
+
+input {
+  font-family: inherit;
+}
+
+.page {
+  position: relative;
+  margin: 0 auto;
+  padding: 20px;
+  width: 70%;
+  height: 100vh;
+  display: grid;
+  gap: 50px;
+  background-color: lightgray;
+}
+
+.game {
+  place-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  text-align: center;
+}
+
+/* #hint {
+  display: none;
+} */
+
+.number-square {
+  position: relative;
+  background-color: white;
+  display: grid;
+  place-items: center;
+  width: 150px;
+  height: 120px;
+}
+
+.number {
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.number-square::before {
+  position: absolute;
+  z-index: var(--z-index);
+  content: "?";
+  width: 100%;
+  height: 100%;
+  font-size: 2rem;
+  font-family: "Chakra Petch";
+  background-color: black;
+  color: white;
+  display: grid;
+  place-items: center;
+}
+
+.guess-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+input,
+button {
+  border: none;
+  border-radius: 7px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}
+
+button {
+  font-family: "Chakra Petch";
+  cursor: pointer;
+  color: white;
+  box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.3);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+button:hover {
+  filter: brightness(1.3);
+  transform: scale(1.1);
+}
+
+button:active {
+  box-shadow: inset 2px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+.guess-input {
+  text-align: center;
+  border: 1px solid black;
+}
+
+.guess-btn {
+  background-color: rgb(11, 67, 170);
+}
+
+.guess-btn:hover {
+  transform: none;
+}
+
+.game-functions {
+  place-self: end;
+  display: flex;
+  gap: 10px;
+}
+
+.end-btn {
+  background-color: rgb(223, 26, 26);
+}
+
+.new-btn {
+  background-color: green;
+}
