@@ -19,53 +19,64 @@ let highScore = 0;
 const getRandomNo = () => {
   randomNumber = Math.floor(Math.random() * 99) + 1;
   randomNumberElem.textContent = randomNumber;
-  //console.log(randomNumber);
 };
 
 //initial random number
 getRandomNo();
 
 //generate hint
-const checkpoints = [5, 10, 15, 20, 30, 40, 45, 50, 60, 70, 80, 85, 90, 100];
+let hintCount = 0;
+let typeHint;
 let lowerHint;
 let higherHint;
+const checkpoints = [5, 10, 15, 20, 30, 40, 45, 50, 60, 70, 80, 85, 90, 100];
 
 const getHint = () => {
+  hintCount++;
+  let type = randomNumber % 2 === 0 ? "even" : "odd";
+  typeHint = "Hint: it is an " + type + " number";
+
   let lowerHintNo = checkpoints.find((checkpoint) => randomNumber < checkpoint);
-  lowerHint = "Hint: the number is below " + lowerHintNo;
+  lowerHint = "Hint: the number is less than " + lowerHintNo;
 
   let higherHintNo = checkpoints.findLast((checkpoint) => randomNumber > checkpoint);
-  higherHint = "Hint: the number is above " + higherHintNo;
+  higherHint = "Hint: the number is higher than " + higherHintNo;
 };
+
+//initialize hint
+getHint();
+hint.textContent = typeHint;
 
 //process player's guess
 const validateGuess = () => {
   const guessNumber = parseInt(input.value);
   getHint();
-
   if (guessNumber < randomNumber) {
-    //console.log("too low");
-    heading.textContent = "too low, try again";
-    hint.textContent = higherHint;
+    //too low
+    heading.textContent = "Too low.";
+    hint.textContent = hintCount <= 2 ? higherHint : "";
     input.value = "";
     lives--;
     setLives();
   } else if (guessNumber > randomNumber) {
-    //console.log("too high");
-    heading.textContent = "too high, try again";
-    hint.textContent = lowerHint;
+    //too high
+    heading.textContent = "Too high.";
+    hint.textContent = hintCount <= 2 ? lowerHint : "";
     input.value = "";
     lives--;
     setLives();
   } else {
-    //console.log("Correct!");
+    //correct
     heading.textContent = "Yes! " + guessNumber + " is correct!";
+    heading.style.color = "green";
     hint.textContent = "";
     root.style.setProperty("--z-index", "-1");
     input.value = "";
     input.setAttribute("readonly", "true");
     score = score + 10;
     scoreSpan.textContent = score;
+    highScore = highScore + score;
+    highScoreSpan.textContent = highScore;
     guessBtn.innerHTML = "Play again!";
     guessBtn.style.backgroundColor = "green";
   }
@@ -112,24 +123,24 @@ guessBtn.onclick = () => {
 //reset game after a win
 const resetGame = () => {
   heading.textContent = "Guess the hidden number";
+  heading.style.color = "black";
+  hintCount = 0;
   root.style.setProperty("--z-index", "0");
   input.removeAttribute("readonly");
   guessBtn.innerHTML = "Guess";
   guessBtn.style.backgroundColor = "#0b43aa";
   getRandomNo();
   getHint();
-  hint.innerHTML = higherHint;
+  hint.textContent = typeHint;
 };
 
 //game over, end the game
 const endGame = () => {
   heading.textContent = "Game Over";
-  hint.textContent = "";
   heading.style.color = "#df1a1a";
   heading.style.backgroundColor = "black";
+  hint.textContent = "";
   root.style.setProperty("--z-index", "-1");
-  highScore = highScore + score;
-  highScoreSpan.textContent = highScore;
   input.setAttribute("readonly", "true");
   guessBtn.style.backgroundColor = "gray";
   guessBtn.style.color = "black";
@@ -139,7 +150,6 @@ endBtn.onclick = endGame;
 
 //set new game after game over
 const newGame = () => {
-  heading.style.color = "black";
   heading.style.backgroundColor = "transparent";
   guessBtn.style.color = "white";
   score = 0;

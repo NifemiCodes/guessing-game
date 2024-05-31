@@ -13,11 +13,6 @@ body {
   font-family: "Saira Semi Condensed";
 }
 
-h1 {
-  font-family: "Chakra Petch";
-  font-size: 2.3rem;
-}
-
 input {
   font-family: inherit;
 }
@@ -33,6 +28,42 @@ input {
   background-color: lightgray;
 }
 
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.game-stats {
+  font-size: 1.3rem;
+}
+
+@keyframes animate {
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.rules {
+  position: absolute;
+  top: -200px;
+  right: 0;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px 10px;
+  animation: animate 3s ease-in-out forwards;
+}
+
+.rules h4 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.rules li {
+  list-style-type: none;
+}
+
 .game {
   place-self: center;
   display: flex;
@@ -42,9 +73,11 @@ input {
   text-align: center;
 }
 
-/* #hint {
-  display: none;
-} */
+h1 {
+  font-family: "Chakra Petch";
+  font-size: 2.3rem;
+  margin-bottom: 10px;
+}
 
 .number-square {
   position: relative;
@@ -82,6 +115,7 @@ input {
 
 input,
 button {
+  outline: none;
   border: none;
   border-radius: 7px;
   padding: 10px;
