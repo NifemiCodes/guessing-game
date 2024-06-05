@@ -45,6 +45,7 @@ const getHint = () => {
 //start game
 const startGame = () => {
   rules.classList.add("animate");
+  input.focus();
   getRandomNo();
   getHint();
   hint.textContent = typeHint;

@@ -34,7 +34,7 @@ input {
   margin: 0 auto;
   padding: 20px;
   width: 70%;
-  height: 100vh;
+  height: 100dvh;
   display: grid;
   gap: 50px;
   background-color: lightgray;
