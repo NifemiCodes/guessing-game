@@ -1,4 +1,6 @@
 const root = document.documentElement;
+const rules = document.getElementById("rules");
+const startBtn = document.getElementById("start-btn");
 const input = document.getElementById("guess-input");
 const guessBtn = document.getElementById("guess-btn");
 const randomNumberElem = document.getElementById("number");
@@ -21,16 +23,13 @@ const getRandomNo = () => {
   randomNumberElem.textContent = randomNumber;
 };
 
-//initial random number
-getRandomNo();
-
-//generate hint
 let hintCount = 0;
 let typeHint;
 let lowerHint;
 let higherHint;
 const checkpoints = [5, 10, 15, 20, 30, 40, 45, 50, 60, 70, 80, 85, 90, 100];
 
+//generate hint
 const getHint = () => {
   hintCount++;
   let type = randomNumber % 2 === 0 ? "even" : "odd";
@@ -43,9 +42,15 @@ const getHint = () => {
   higherHint = "Hint: the number is higher than " + higherHintNo;
 };
 
-//initialize hint
-getHint();
-hint.textContent = typeHint;
+//start game
+const startGame = () => {
+  rules.classList.add("animate");
+  getRandomNo();
+  getHint();
+  hint.textContent = typeHint;
+};
+
+startBtn.onclick = startGame;
 
 //process player's guess
 const validateGuess = () => {
